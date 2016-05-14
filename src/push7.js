@@ -20,18 +20,18 @@ export class Push7 {
         endpoint='https://:host/api/v1/:appno/:endpoint',
         useragent='Node-Push7 Client/' + version,
     }) {
-        /** @type {string} */
+        /** @type {string} API Host */
         this.host = host;
-        /** @type {string} */
+        /** @type {string} Push7 AppNo */
         this.appno = appno;
-        /** @type {string} */
+        /** @type {string} Push7 AppKey */
         this.apikey = apikey;
-        /** @type {string} */
+        /** @type {string} API Endpoint */
         this.endpoint = endpoint;
         /**
          *
-         * @type {object}
-         * @property {string} User-Agent
+         * @type {object} request Header
+         * @property {string} User-Agent User Agent
          */
         this.headers = {
             'User-Agent': useragent
