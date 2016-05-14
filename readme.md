@@ -42,3 +42,15 @@ p7send({
 npm install -S node-push7
 ```
 
+
+### build
+
+babel
+```sh
+npm run babel
+```
+
+esdoc
+```sh
+npm run esdoc
+```
