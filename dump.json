@@ -10,7 +10,7 @@
     "access": null,
     "description": null,
     "lineNumber": 1,
-    "content": "import Request from \"request-promise\"\n\nconst packagejson = require('../package.json');\n\nconst {version} = packagejson;\n\n/**\n * Push7 API Client\n */\nexport class Push7 {\n\n    /**\n     *\n     * @param {{host:string, appno:string, apikey:string, endpoint:string, useragent: string}} param\n     */\n    constructor({\n        host='api.push7.jp',\n        appno,\n        apikey,\n        endpoint='https://:host/api/v1/:appno/:endpoint',\n        useragent='Node-Push7 Client/' + version,\n    }) {\n        /** @type {string} */\n        this.host = host;\n        /** @type {string} */\n        this.appno = appno;\n        /** @type {string} */\n        this.apikey = apikey;\n        /** @type {string} */\n        this.endpoint = endpoint;\n        /**\n         *\n         * @type {object}\n         * @property {string} User-Agent\n         */\n        this.headers = {\n            'User-Agent': useragent\n        };\n    }\n\n\n    /**\n     * Get App Info\n     * @param {object} param\n     * @returns {Promise} request\n     */\n    head(param = {}) {\n        return Push7.get(this.reqUrl('head'), param);\n    }\n\n\n    /**\n     * Send Push Notification\n     * @param {{title:string, body:string, icon:string, url:string, apikey:string, param:object}} param\n     * @return {Promise} request\n     */\n    send({\n        title,\n        body,\n        icon,\n        url,\n        apikey,\n        param = {},\n    }) {\n        param = Object.assign({\n            title: title,\n            body: body,\n            icon: icon,\n            url: url,\n            apikey: apikey === undefined ? this.apikey : apikey\n        }, param);\n        return Push7.post(this.reqUrl('send'), param);\n\n\n    }\n\n\n    /**\n     *\n     * @param {string} url\n     * @param {object} param\n     * @return {Promise} request\n     */\n    static get(url, param) {\n        return Request({\n            qs: param,\n            uri: url,\n            json: true\n        })\n    }\n\n    /**\n     *\n     * @param {string} url\n     * @param {object} param\n     * @return {Promise} request\n     */\n    static post(url, param) {\n        return Request({\n            method: 'POST',\n            uri: url,\n            body: param,\n            json: true\n        })\n    }\n\n\n    /**\n     *\n     * @param {string} endpoint\n     * @return {string} full url\n     */\n    reqUrl(endpoint) {\n        return this.endpoint.replace(':host', this.host).replace(':appno', this.appno).replace(':endpoint', endpoint);\n    }\n\n}"
+    "content": "import Request from \"request-promise\"\n\nconst packagejson = require('../package.json');\n\nconst {version} = packagejson;\n\n/**\n * Push7 API Client\n */\nexport class Push7 {\n\n    /**\n     *\n     * @param {{host:string, appno:string, apikey:string, endpoint:string, useragent: string}} param\n     */\n    constructor({\n        host='api.push7.jp',\n        appno,\n        apikey,\n        endpoint='https://:host/api/v1/:appno/:endpoint',\n        useragent='Node-Push7 Client/' + version,\n    }) {\n        /** @type {string} API Host */\n        this.host = host;\n        /** @type {string} Push7 AppNo */\n        this.appno = appno;\n        /** @type {string} Push7 AppKey */\n        this.apikey = apikey;\n        /** @type {string} API Endpoint */\n        this.endpoint = endpoint;\n        /**\n         *\n         * @type {object} request Header\n         * @property {string} User-Agent User Agent\n         */\n        this.headers = {\n            'User-Agent': useragent\n        };\n    }\n\n\n    /**\n     * Get App Info\n     * @param {object} param\n     * @returns {Promise} request\n     */\n    head(param = {}) {\n        return Push7.get(this.reqUrl('head'), param);\n    }\n\n\n    /**\n     * Send Push Notification\n     * @param {{title:string, body:string, icon:string, url:string, apikey:string, param:object}} param\n     * @return {Promise} request\n     */\n    send({\n        title,\n        body,\n        icon,\n        url,\n        apikey,\n        param = {},\n    }) {\n        param = Object.assign({\n            title: title,\n            body: body,\n            icon: icon,\n            url: url,\n            apikey: apikey === undefined ? this.apikey : apikey\n        }, param);\n        return Push7.post(this.reqUrl('send'), param);\n\n\n    }\n\n\n    /**\n     *\n     * @param {string} url\n     * @param {object} param\n     * @return {Promise} request\n     */\n    static get(url, param) {\n        return Request({\n            qs: param,\n            uri: url,\n            headers: this.headers,\n            json: true\n        })\n    }\n\n    /**\n     *\n     * @param {string} url\n     * @param {object} param\n     * @return {Promise} request\n     */\n    static post(url, param) {\n        return Request({\n            method: 'POST',\n            uri: url,\n            body: param,\n            headers: this.headers,\n            json: true\n        })\n    }\n\n\n    /**\n     *\n     * @param {string} endpoint\n     * @return {string} full url\n     */\n    reqUrl(endpoint) {\n        return this.endpoint.replace(':host', this.host).replace(':appno', this.appno).replace(':endpoint', endpoint);\n    }\n\n}"
   },
   {
     "__docId__": 1,
@@ -195,7 +195,7 @@
         "spread": false,
         "optional": false,
         "name": "User-Agent",
-        "description": ""
+        "description": "User Agent"
       }
     ],
     "type": {
@@ -332,7 +332,7 @@
     "longname": "src/push7.js~Push7.post",
     "access": null,
     "description": "",
-    "lineNumber": 98,
+    "lineNumber": 99,
     "params": [
       {
         "nullable": null,
@@ -375,7 +375,7 @@
     "longname": "src/push7.js~Push7#reqUrl",
     "access": null,
     "description": "",
-    "lineNumber": 113,
+    "lineNumber": 115,
     "params": [
       {
         "nullable": null,
