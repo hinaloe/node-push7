@@ -85,6 +85,7 @@ export class Push7 {
         return Request({
             qs: param,
             uri: url,
+            headers: this.headers,
             json: true
         })
     }
@@ -100,6 +101,7 @@ export class Push7 {
             method: 'POST',
             uri: url,
             body: param,
+            headers: this.headers,
             json: true
         })
     }
