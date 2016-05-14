@@ -4,8 +4,15 @@ const packagejson = require('../package.json');
 
 const {version} = packagejson;
 
+/**
+ * Push7 API Client
+ */
 export class Push7 {
 
+    /**
+     *
+     * @param {{host:string, appno:string, apikey:string, endpoint:string, useragent: string}} param
+     */
     constructor({
         host='api.push7.jp',
         appno,
@@ -13,14 +20,19 @@ export class Push7 {
         endpoint='https://:host/api/v1/:appno/:endpoint',
         useragent='Node-Push7 Client/' + version,
     }) {
-        /** @member {string} */
+        /** @type {string} */
         this.host = host;
-        /** @member {string} */
+        /** @type {string} */
         this.appno = appno;
-        /** @member {string} */
+        /** @type {string} */
         this.apikey = apikey;
-        /** @member {string} */
+        /** @type {string} */
         this.endpoint = endpoint;
+        /**
+         *
+         * @type {object}
+         * @property {string} User-Agent
+         */
         this.headers = {
             'User-Agent': useragent
         };
@@ -28,8 +40,8 @@ export class Push7 {
 
 
     /**
-     *
-     * @param param
+     * Get App Info
+     * @param {object} param
      * @returns {Promise} request
      */
     head(param = {}) {
@@ -38,13 +50,8 @@ export class Push7 {
 
 
     /**
-     *
-     * @param {string} title
-     * @param {string} body
-     * @param {string} icon
-     * @param {string} url
-     * @param {string} apikey
-     * @param  param
+     * Send Push Notification
+     * @param {{title:string, body:string, icon:string, url:string, apikey:string, param:object}} param
      * @return {Promise} request
      */
     send({
@@ -71,7 +78,7 @@ export class Push7 {
     /**
      *
      * @param {string} url
-     * @param {*} param
+     * @param {object} param
      * @return {Promise} request
      */
     static get(url, param) {
@@ -84,8 +91,8 @@ export class Push7 {
 
     /**
      *
-     * @param url
-     * @param param
+     * @param {string} url
+     * @param {object} param
      * @return {Promise} request
      */
     static post(url, param) {
