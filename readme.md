@@ -24,7 +24,7 @@ p7.head()
     .catch(err=> console.error(`Error: ${err.name} (${err.message})`))
 
 // push notification
-p7send({
+p7.send({
   title:'Push Title',
   body:"Here, main messege",
   icon:"http://example.com/example-image.png", // push icon
